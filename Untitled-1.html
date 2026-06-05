@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Comunicación</title>
+
+  <style>
+    :root{
+      --bg-1:#f5fbf9;
+      --bg-2:#eef6f3;
+      --surface:#ffffff;
+      --surface-soft:#fbfefd;
+
+      --text:#18323a;
+      --text-soft:#5f767d;
+      --text-muted:#7d9096;
+
+      --bayer-green:#6cc24a;
+      --bayer-green-dark:#54a531;
+      --bayer-teal:#00a3a1;
+      --bayer-teal-dark:#007c7a;
+      --bayer-blue:#00a0df;
+      --bayer-blue-dark:#0077b6;
+
+      --primary:var(--bayer-teal);
+      --primary-dark:var(--bayer-teal-dark);
+      --secondary:var(--bayer-green);
+
+      --line:rgba(0,163,161,0.14);
+      --line-soft:rgba(24,50,58,0.08);
+      --line-softer:rgba(24,50,58,0.05);
+
+      --shadow-xs:0 4px 12px rgba(16,24,40,0.04);
+      --shadow-sm:0 8px 24px rgba(16,24,40,0.06);
+      --shadow-md:0 16px 40px rgba(16,24,40,0.10);
+      --shadow-lg:0 26px 70px rgba(16,24,40,0.14);
+
+      --radius-xs:12px;
+      --radius-sm:16px;
+      --radius-md:20px;
+      --radius-lg:26px;
+      --radius-xl:32px;
+
+      --max-width:1280px;
+      --transition:240ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    *{
+      box-sizing:border-box;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    html{
+      scroll-behavior:smooth;
+      height:100%;
+    }
+
+    body{
+      margin:0;
+      height:100%;
+      overflow:hidden;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(0,163,161,0.07), transparent 22%),
+        radial-gradient(circle at top right, rgba(108,194,74,0.05), transparent 18%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    .page{
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      position:relative;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+  .hero{
+  position:sticky;
+  top:0;
+  z-index:30;
+  flex:0 0 auto;
+  overflow:hidden;
+  border-bottom-left-radius:30px;
+  border-bottom-right-radius:30px;
+  background:
+    linear-gradient(135deg, rgba(1, 194, 191, 0.86) 0%, rgba(1, 183, 255, 0.64) 42%, rgba(108, 251, 51, 0.56) 100%),
+    url("assets/header-5.jpeg");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  box-shadow:var(--shadow-lg);
+  isolation:isolate;
+}
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,0.14), transparent 18%),
+        radial-gradient(circle at 85% 16%, rgba(255,255,255,0.10), transparent 14%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.12));
+      pointer-events:none;
+      z-index:0;
+    }
+
+.hero-inner{
+  position:relative;
+  z-index:1;
+  max-width:var(--max-width);
+  margin:0 auto;
+  min-height:auto;
+  padding:10px 34px 8px 34px;
+  display:grid;
+  grid-template-columns:1.08fr 0.92fr;
+  gap:30px;
+  align-items:center;
+}
+
+    .hero-copy{
+      max-width:700px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:flex-start;
+    }
+
+    .hero-custom-title{
+  position:relative;
+  display:inline-block;
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:clamp(30px, 3.7vw, 50px);
+  line-height:1.09;
+  font-weight:700;
+  letter-spacing:-0.8px;
+  color:#ffffff;
+  text-shadow:0 2px 14px rgba(0,0,0,0.10);
+}
+
+.hero-custom-title::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-10px;
+  width:100%;
+  height:4px;
+  border-radius:999px;
+  background:linear-gradient(90deg, rgba(255,255,255,0.2) 0%, #00a0df 25%, #00a3a1 50%, #6cc24a 75%, rgba(255,255,255,0.2) 100%);
+  background-size:200% 100%;
+  box-shadow:0 0 14px rgba(255,255,255,0.18);
+  animation:titleLineMove 4.2s linear infinite;
+}
+.hero-brand-large{
+  margin-top:14px;
+  width:220px;
+  max-width:none;
+  height:auto;
+  display:block;
+  object-fit:contain;
+  transform-origin:left center;
+  transform:scale(1.35);
+  filter:drop-shadow(0 12px 24px rgba(0,0,0,0.18));
+  animation:logoCorporateFloat 4.8s ease-in-out infinite;
+}
+    /* Slider */
+    .hero-media{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .hero-frame{
+  position:relative;
+  width:100%;
+  max: width 1400px;px;
+  height:270px;
+  overflow:hidden;
+  border-radius:20px;
+  background:rgba(255, 255, 255, 0.878);
+  border:1px solid rgba(255,255,255,0.25);
+  box-shadow:0 18px 36px rgba(0,0,0,0.25);
+  backdrop-filter:blur(10px);
+}
+    .hero-frame::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:3;
+      pointer-events:none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.10)),
+        linear-gradient(90deg, rgba(255,255,255,0.05), transparent 20%, transparent 80%, rgba(255,255,255,0.03));
+    }
+
+    .hero-slide{
+      position:absolute;
+      inset:0;
+      opacity:0;
+      transform:scale(1.04);
+      transition:
+        opacity 900ms ease,
+        transform 5200ms ease;
+    }
+
+    .hero-slide.active{
+      opacity:1;
+      transform:scale(1);
+      z-index:2;
+    }
+
+    .hero-slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+    }
+
+    .hero-dots{
+      position:absolute;
+      left:50%;
+      bottom:10px;
+      transform:translateX(-50%);
+      display:flex;
+      gap:8px;
+      z-index:4;
+    }
+
+    .hero-dot{
+      width:8px;
+      height:8px;
+      border:none;
+      border-radius:50%;
+      background:rgba(255,255,255,0.42);
+      padding:0;
+      cursor:pointer;
+      transition:
+        transform var(--transition),
+        background var(--transition),
+        box-shadow var(--transition);
+    }
+
+    .hero-dot.active{
+      background:#fff;
+      box-shadow:0 0 0 4px rgba(255,255,255,0.14);
+      transform:scale(1.08);
+    }
+    /* =========================================================
+       MAIN
+    ========================================================= */
+    .main{
+  flex:1 1 auto;
+  overflow-y:auto;
+  max-width:var(--max-width);
+  width:100%;
+  margin:0 auto;
+  padding:20px 24px 60px 24px;
+}
+    .sections{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:28px;
+      align-items:start;
+    }
+
+    .panel{
+      position:relative;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.92));
+      border:1px solid var(--line);
+      border-radius:var(--radius-xl);
+      padding:28px 26px 26px 26px;
+      box-shadow:var(--shadow-sm);
+      overflow:hidden;
+      backdrop-filter:blur(10px);
+    }
+
+    .panel::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:0;
+      bottom:0;
+      width:4px;
+      background:linear-gradient(180deg, var(--bayer-blue), var(--bayer-green));
+      opacity:.95;
+    }
+
+    .panel::after{
+      content:"";
+      position:absolute;
+      inset:auto -80px -80px auto;
+      width:220px;
+      height:220px;
+      background:radial-gradient(circle, rgba(0,163,161,0.08), transparent 62%);
+      pointer-events:none;
+    }
+
+    .panel-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .panel-title h2{
+      margin:0;
+      font-size:clamp(24px, 2.2vw, 34px);
+      line-height:1.08;
+      font-weight:700;
+      color:#1f3b43;
+      letter-spacing:-0.5px;
+    }
+
+    .panel-title p{
+      margin:10px 0 0 0;
+      max-width:580px;
+      color:var(--text-soft);
+      font-size:14px;
+      line-height:1.58;
+    }
+
+    .panel-label{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:linear-gradient(180deg, rgba(0,163,161,0.08), rgba(108,194,74,0.10));
+      border:1px solid rgba(0,163,161,0.12);
+      color:var(--primary-dark);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.24px;
+      white-space:nowrap;
+    }
+
+    /* =========================================================
+       CARDS
+    ========================================================= */
+    .cards-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .card{
+      position:relative;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-height:92px;
+      padding:18px;
+      border-radius:20px;
+      background:linear-gradient(180deg, #ffffff, #fbfefd);
+      border:1px solid var(--line-softer);
+      box-shadow:var(--shadow-xs);
+      transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        border-color var(--transition),
+        background var(--transition);
+      overflow:hidden;
+      cursor:pointer;
+      outline:none;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:0;
+      bottom:0;
+      width:0;
+      background:linear-gradient(180deg, var(--bayer-blue), var(--bayer-green));
+      transition:width var(--transition);
+    }
+
+    .card::after{
+      content:"";
+      position:absolute;
+      right:-32px;
+      bottom:-42px;
+      width:170px;
+      height:170px;
+      background:radial-gradient(circle, rgba(0,163,161,0.12), transparent 60%);
+      opacity:0;
+      transition:opacity var(--transition);
+      pointer-events:none;
+    }
+
+    .card:hover{
+      transform:translateY(-4px);
+      box-shadow:var(--shadow-md);
+      border-color:rgba(0,163,161,0.22);
+      background:linear-gradient(180deg, #ffffff, #f9fffd);
+    }
+
+    .card:hover::before{
+      width:4px;
+    }
+
+    .card:hover::after{
+      opacity:1;
+    }
+
+    .card:active{
+      transform:translateY(-1px) scale(0.997);
+    }
+
+    .card-icon{
+      position:relative;
+      z-index:1;
+      width:48px;
+      height:48px;
+      min-width:48px;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        linear-gradient(180deg, rgba(0,163,161,0.16), rgba(108,194,74,0.08));
+      border:1px solid rgba(0,163,161,0.12);
+      color:var(--primary-dark);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.45);
+      transition:
+        transform var(--transition),
+        background var(--transition),
+        border-color var(--transition);
+    }
+
+    .card:hover .card-icon{
+      transform:scale(1.05);
+      background:
+        linear-gradient(180deg, rgba(0,163,161,0.22), rgba(108,194,74,0.12));
+      border-color:rgba(0,163,161,0.18);
+    }
+
+    .card-icon svg{
+      width:22px;
+      height:22px;
+      stroke:currentColor;
+    }
+
+    .card-content{
+      position:relative;
+      z-index:1;
+      flex:1;
+      min-width:0;
+    }
+
+    .card-title{
+      font-size:16px;
+      line-height:1.24;
+      font-weight:700;
+      color:#17323a;
+      letter-spacing:-0.12px;
+    }
+
+    .card-desc{
+      margin-top:5px;
+      font-size:13px;
+      line-height:1.46;
+      color:var(--text-soft);
+    }
+
+    .card-arrow{
+      position:relative;
+      z-index:1;
+      font-size:18px;
+      color:#7a8f95;
+      opacity:.78;
+      transition:
+        transform var(--transition),
+        color var(--transition),
+        opacity var(--transition);
+    }
+
+    .card:hover .card-arrow{
+      transform:translateX(4px);
+      color:var(--primary-dark);
+      opacity:1;
+    }
+
+    /* =========================================================
+       QUICK LINKS / PILLS
+    ========================================================= */
+    .quick-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .quick-link{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      min-height:42px;
+      padding:0 16px;
+      border-radius:14px;
+      background:linear-gradient(180deg, #ffffff, #f8fcfb);
+      border:1px solid rgba(24,50,58,0.08);
+      box-shadow:0 6px 16px rgba(16,24,40,0.04);
+      color:#305157;
+      font-weight:600;
+      font-size:14px;
+      transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        border-color var(--transition),
+        background var(--transition);
+      outline:none;
+    }
+
+    .quick-link:hover{
+      transform:translateY(-2px);
+      box-shadow:0 12px 26px rgba(16,24,40,0.08);
+      border-color:rgba(0,163,161,0.20);
+      background:#ffffff;
+    }
+
+    .quick-dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:linear-gradient(180deg, var(--bayer-blue), var(--bayer-green));
+      box-shadow:0 0 0 4px rgba(0,163,161,0.10);
+    }
+
+    .resource-top{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-bottom:22px;
+    }
+
+    .resource-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:126px;
+      height:52px;
+      padding:0 20px;
+      border-radius:16px;
+      background:linear-gradient(180deg, #ffffff, #f9fcfb);
+      border:1px solid rgba(24,50,58,0.08);
+      box-shadow:0 8px 20px rgba(16,24,40,0.04);
+      font-weight:700;
+      color:#35575d;
+      letter-spacing:-0.14px;
+      transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        border-color var(--transition),
+        color var(--transition),
+        background var(--transition);
+      outline:none;
+    }
+
+    .resource-pill:hover{
+      transform:translateY(-3px);
+      box-shadow:0 16px 32px rgba(16,24,40,0.08);
+      border-color:rgba(0,163,161,0.20);
+      color:var(--primary-dark);
+      background:#ffffff;
+    }
+
+    /* LOGO MINI FIJO */
+    .floating-logo{
+      position:fixed;
+      left:18px;
+      bottom:18px;
+      z-index:60;
+      width:74px;
+      height:74px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      pointer-events:none;
+    }
+
+    .floating-logo::before,
+    .floating-logo::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      border:2px solid rgba(0,163,161,0.22);
+      transform:scale(0.8);
+      opacity:0;
+      animation:wavePulse 3.2s infinite ease-out;
+    }
+
+    .floating-logo::before{
+      width:74px;
+      height:74px;
+    }
+
+    .floating-logo::after{
+      width:74px;
+      height:74px;
+      animation-delay:1.4s;
+      border-color:rgba(108,194,74,0.20);
+    }
+
+    .floating-logo-inner{
+      position:relative;
+      z-index:2;
+      width:58px;
+      height:58px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255, 255, 255, 0);
+      border:1px solid rgba(0,163,161,0.14);
+      box-shadow:
+        0 10px 24px rgba(16,24,40,0.12),
+        0 0 0 8px rgba(255,255,255,0.22);
+      animation:floatLogo 4.5s ease-in-out infinite;
+    }
+
+    .footer-logo{
+      width:38px;
+      opacity:0.95;
+      display:block;
+    }
+
+    @keyframes wavePulse{
+      0%{
+        transform:scale(0.78);
+        opacity:0;
+      }
+      20%{
+        opacity:0.45;
+      }
+      100%{
+        transform:scale(1.9);
+        opacity:0;
+      }
+    }
+
+    @keyframes floatLogo{
+      0%, 100%{
+        transform:translateY(0px);
+      }
+      50%{
+        transform:translateY(-4px);
+      }
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+    @media (max-width:1100px){
+      .hero-inner{
+        grid-template-columns:1fr;
+        min-height:auto;
+      }
+
+      .hero-media{
+        justify-content:flex-start;
+      }
+
+      .sections{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:760px){
+      .hero{
+        border-bottom-left-radius:22px;
+        border-bottom-right-radius:22px;
+      }
+
+      .hero-inner{
+        padding:20px 18px;
+        gap:18px;
+      }
+
+      .hero-custom-title{
+        font-size:30px;
+      }
+
+      .hero-brand-large{
+        width:150px;
+        max-width:68%;
+      }
+
+      .hero-frame{
+        height:135px;
+        max-width:100%;
+        border-radius:16px;
+      }
+
+      .main{
+        padding:18px 14px 80px 14px;
+      }
+
+      .panel{
+        padding:22px 18px 20px 18px;
+      }
+
+      .cards-grid{
+        grid-template-columns:1fr;
+      }
+
+      .resource-pill{
+        width:100%;
+        min-width:unset;
+      }
+
+      .floating-logo{
+        left:14px;
+        bottom:14px;
+        width:64px;
+        height:64px;
+      }
+
+      .floating-logo::before,
+      .floating-logo::after{
+        width:64px;
+        height:64px;
+      }
+
+      .floating-logo-inner{
+        width:50px;
+        height:50px;
+      }
+
+      .footer-logo{
+        width:32px;
+      }
+    }
+@keyframes brandFloat{
+  0%, 100%{
+    transform:translateY(0) scale(1);
+    filter:drop-shadow(0 12px 26px rgba(0,0,0,0.16));
+  }
+  50%{
+    transform:translateY(-3px) scale(1.03);
+    filter:drop-shadow(0 16px 30px rgba(0,0,0,0.20));
+  }
+}
+
+@keyframes brandShine{
+  0%{
+    transform:skewX(-18deg) translateX(-260%);
+    opacity:0;
+  }
+  12%{
+    opacity:1;
+  }
+  32%{
+    transform:skewX(-18deg) translateX(380%);
+    opacity:0;
+  }
+  100%{
+    transform:skewX(-18deg) translateX(380%);
+    opacity:0;
+  }
+}
+@keyframes logoCorporateFloat{
+  0%, 100%{
+    transform:scale(1.35) translateY(0);
+    filter:drop-shadow(0 12px 24px rgba(0,0,0,0.18));
+  }
+  50%{
+    transform:scale(1.40) translateY(-3px);
+    filter:drop-shadow(0 16px 30px rgba(0,0,0,0.24));
+  }
+}
+    @media (prefers-reduced-motion: reduce){
+      *{
+        animation:none !important;
+        transition:none !important;
+        scroll-behavior:auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-inner">
+
+        <!-- TEXTO IZQUIERDA -->
+<div class="hero-copy">
+  <h1 class="hero-custom-title">Comunicaciones María Eugenia</h1>
+
+  <div class="hero-brand-wrap">
+    <img src="logo-principal.png" alt="Logo principal" class="hero-brand-large" />
+  </div>
+</div>
+
+        <!-- SLIDER DERECHA -->
+        <div class="hero-media">
+          <div class="hero-frame" aria-label="Carrusel visual del portal">
+            <div class="hero-slide active">
+              <img src="header-1.jpeg" alt="Imagen corporativa 1" />
+            </div>
+            <div class="hero-slide">
+              <img src="header-2.jpeg" alt="Imagen corporativa 2" />
+            </div>
+            <div class="hero-slide">
+              <img src="header-3.jpeg" alt="Imagen corporativa 3" />
+            </div>
+            <div class="hero-slide">
+              <img src="header-4.jpeg" alt="Imagen corporativa 4" />
+            </div>
+
+            <div class="hero-dots" role="tablist" aria-label="Navegación del slider">
+              <button class="hero-dot active" aria-label="Ver imagen 1"></button>
+              <button class="hero-dot" aria-label="Ver imagen 2"></button>
+              <button class="hero-dot" aria-label="Ver imagen 3"></button>
+              <button class="hero-dot" aria-label="Ver imagen 4"></button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+      <div class="sections">
+
+        <!-- EVENTOS -->
+        <section class="panel" id="eventos">
+          <div class="panel-head">
+            <div class="panel-title">
+              <h2>Eventos Relevantes</h2>
+              <p>
+                Accesos directos a iniciativas, materiales de contexto y contenidos vinculados a la agenda de comunicación.
+              </p>
+            </div>
+            <div class="panel-label">Direct access</div>
+          </div>
+
+          <div class="cards-grid">
+            <a href="#" class="card">
+              <div class="card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                  <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h8.3L20 10.2v8.3A1.5 1.5 0 0 1 18.5 20h-13A1.5 1.5 0 0 1 4 18.5v-13Z"/>
+                  <path d="M14 4v6h6"/>
+                </svg>
+              </div>
+              <div class="card-content">
+                <div class="card-title">Minuta Comunicación Interna</div>
+                <div class="card-desc">Resumen de sesiones, puntos clave y seguimiento.</div>
+              </div>
+              <div class="card-arrow">→</div>
+            </a>
+
+            <a href="#" class="card">
+              <div class="card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9.5" cy="7" r="3"/>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 4.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </div>
+              <div class="card-content">
+                <div class="card-title">Encuentro Comunicación</div>
+                <div class="card-desc">Espacio central para alineación y novedades.</div>
+              </div>
+              <div class="card-arrow">→</div>
+            </a>
+
+            <a href="#" class="card">
+              <div class="card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                  <path d="M7 20h10"/>
+                  <path d="M12 20V10"/>
+                  <path d="M5 10c0-3.314 3.134-6 7-6s7 2.686 7 6"/>
+                  <path d="M7 14c1.5 1 3.2 1.5 5 1.5s3.5-.5 5-1.5"/>
+                </svg>
+              </div>
+              <div class="card-content">
+                <div class="card-title">Experiencia en Campos</div>
+                <div class="card-desc">Materiales y referencias de experiencias en terreno.</div>
+              </div>
+              <div class="card-arrow">→</div>
+            </a>
+
+            <a href="#" class="card">
+              <div class="card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                  <circle cx="12" cy="12" r="8"/>
+                  <path d="M12 8v5l3 2"/>
+                </svg>
+              </div>
+              <div class="card-content">
+                <div class="card-title">Línea de Tiempo Cultural</div>
+                <div class="card-desc">Hitos, evolución y referencias históricas.</div>
+              </div>
+              <div class="card-arrow">→</div>
+            </a>
+          </div>
+
+          <div class="quick-actions">
+            <a href="#" class="quick-link">
+              <span class="quick-dot"></span>
+              Agenda
+            </a>
+
+            <a href="#" class="quick-link">
+              <span class="quick-dot"></span>
+              Glosario
+            </a>
+
+            <a href="#" class="quick-link">
+              <span class="quick-dot"></span>
+              Especiales de cultura
+            </a>
+          </div>
+        </section>
+
+        <!-- RECURSOS -->
+        <section class="panel" id="recursos">
+          <div class="panel-head">
+            <div class="panel-title">
+              <h2>Recursos Visuales y Narrativas</h2>
+              <p>
+                Material institucional, presentaciones, activos gráficos y piezas de narrativa para acompañar la comunicación.
+              </p>
+            </div>
+            <div class="panel-label">Resource hub</div>
+          </div>
+
+          <div class="resource-top">
+            <a href="#" class="resource-pill">DSO</a>
+            <a href="#" class="resource-pill">onePSS</a>
+            <a href="#" class="resource-pill">Facilities</a>
+          </div>
+
+          <div class="cards-grid">
+            <a href="#" class="card">
+              <div class="card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                  <path d="M4 7.5A1.5 1.5 0 0 1 5.5 6h13A1.5 1.5 0 0 1 20 7.5v9A1.5 1.5 0 0 1 18.5 18h-13A1.5 1.5 0 0 1 4 16.5v-9Z"/>
+                  <circle cx="9" cy="11" r="1.2"/>
+                  <path d="m20 15-4.5-4.5L7 18"/>
+                </svg>
+              </div>
+              <div class="card-content">
+                <div class="card-title">Logos</div>
+                <div class="card-desc">Activos institucionales y elementos de marca.</div>
+              </div>
+              <div class="card-arrow">→</div>
+            </a>
+
+            <a href="#" class="card">
+              <div class="card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                  <path d="M6 3.8h8.4L20 9.4v10.8A1.8 1.8 0 0 1 18.2 22H7.8A1.8 1.8 0 0 1 6 20.2V3.8Z"/>
+                  <path d="M14.2 4v5.2H19.4"/>
+                </svg>
+              </div>
+              <div class="card-content">
+                <div class="card-title">PPT</div>
+                <div class="card-desc">Presentaciones base y documentos de apoyo.</div>
+              </div>
+              <div class="card-arrow">→</div>
+            </a>
+
+            <a href="#" class="card">
+              <div class="card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                  <path d="M4 6.5A1.5 1.5 0 0 1 5.5 5h13A1.5 1.5 0 0 1 20 6.5v11A1.5 1.5 0 0 1 18.5 19h-13A1.5 1.5 0 0 1 4 17.5v-11Z"/>
+                  <circle cx="12" cy="12" r="3.5"/>
+                </svg>
+              </div>
+              <div class="card-content">
+                <div class="card-title">Fotos</div>
+                <div class="card-desc">Repositorio visual y fotografías generales.</div>
+              </div>
+              <div class="card-arrow">→</div>
+            </a>
+
+            <a href="#" class="card">
+              <div class="card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                  <path d="M12 20s7-4.4 7-10a4 4 0 0 0-7-2.6A4 4 0 0 0 5 10c0 5.6 7 10 7 10Z"/>
+                </svg>
+              </div>
+              <div class="card-content">
+                <div class="card-title">Narrativas</div>
+                <div class="card-desc">Mensajes clave, storytelling y líneas editoriales.</div>
+              </div>
+              <div class="card-arrow">→</div>
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- LOGO MINI FIJO ABAJO IZQUIERDA -->
+    <div class="floating-logo" aria-hidden="true">
+      <div class="floating-logo-inner">
+        <img src="logo-mini.png" alt="Logo secundario" class="footer-logo" />
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      const slides = document.querySelectorAll('.hero-slide');
+      const dots = document.querySelectorAll('.hero-dot');
+      const frame = document.querySelector('.hero-frame');
+
+      if (!slides.length || !dots.length || !frame) return;
+
+      let current = 0;
+      let interval = null;
+      const delay = 4800;
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+        });
+
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+          dot.setAttribute('aria-pressed', i === index ? 'true' : 'false');
+        });
+
+        current = index;
+      }
+
+      function nextSlide() {
+        const next = (current + 1) % slides.length;
+        showSlide(next);
+      }
+
+      function startAutoplay() {
+        stopAutoplay();
+        interval = setInterval(nextSlide, delay);
+      }
+
+      function stopAutoplay() {
+        if (interval) clearInterval(interval);
+      }
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          showSlide(index);
+          startAutoplay();
+        });
+      });
+
+      frame.addEventListener('mouseenter', stopAutoplay);
+      frame.addEventListener('mouseleave', startAutoplay);
+
+      showSlide(0);
+      startAutoplay();
+    })();
+  </script>
+</body>
+</html>
