@@ -681,6 +681,8 @@
 
       .sections{
         grid-template-columns:1fr;
+        max-width:1400px;
+margin:0 auto;
       }
     }
 
@@ -794,6 +796,15 @@
         scroll-behavior:auto !important;
       }
     }
+ body{
+  margin:0;
+}
+
+/* Hack full width en SharePoint */
+.page{
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+}
   </style>
 </head>
 
