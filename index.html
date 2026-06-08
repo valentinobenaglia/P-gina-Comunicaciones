@@ -95,14 +95,14 @@
   .hero{
   position:sticky;
   top:0;
-  z-index:30;
+  z-index:100;
   flex:0 0 auto;
   overflow:hidden;
   border-bottom-left-radius:30px;
   border-bottom-right-radius:30px;
-  background:
-    linear-gradient(135deg, rgba(1, 194, 191, 0.86) 0%, rgba(1, 183, 255, 0.64) 42%, rgba(108, 251, 51, 0.56) 100%),
-    url("assets/header-5.jpeg");
+ background:
+  linear-gradient(135deg, rgba(1, 194, 191, 0.96) 0%, rgba(1, 183, 255, 0.92) 42%, rgba(108, 251, 51, 0.90) 100%),
+  url("assets/header-5.jpeg");
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
@@ -125,16 +125,15 @@
 .hero-inner{
   position:relative;
   z-index:1;
-  max-width:var(--max-width);
-  margin:0 auto;
-  min-height:auto;
+  max-width:100%;
+  width:100%;
+  margin:0;
   padding:10px 34px 8px 34px;
   display:grid;
   grid-template-columns:1.08fr 0.92fr;
   gap:30px;
   align-items:center;
 }
-
     .hero-copy{
       max-width:700px;
       display:flex;
@@ -268,9 +267,9 @@
 .main{
   flex:1 1 auto;
   overflow:visible;
-  max-width:var(--max-width);
+  max-width:100%;
   width:100%;
-  margin:0 auto;
+  margin:0;
   padding:28px 28px 80px 28px;
 }
     .sections{
